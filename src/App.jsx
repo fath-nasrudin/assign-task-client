@@ -6,6 +6,7 @@ import Welcome from './features/auth/Welcome'
 import NotesList from './features/notes/NotesList'
 import UsersList from './features/users/UsersList'
 import { Routes, Route } from 'react-router-dom'
+import AddUserForm from './features/users/AddUserForm'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
           <Route path='users'>
             <Route index element={<UsersList />} />
+            <Route path='add' element={<AddUserForm />} />
           </Route>
 
           <Route path='notes'>

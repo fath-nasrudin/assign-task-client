@@ -16,6 +16,8 @@ const Welcome = () => {
 
       <p><Link to="/dash/users">View User Settings</Link></p>
 
+      <p><Link to="/dash/users/add">Add New User</Link></p>
+
     </section>
   )
 }
