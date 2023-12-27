@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import AddUserForm from './features/users/AddUserForm'
 import EditUser from './features/users/EditUser'
 import Prefetch from './features/auth/Prefetch'
+import AddNote from './features/notes/AddNote'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
 
             <Route path='notes'>
               <Route index element={<NotesList />} />
+              <Route path='add' element={<AddNote />} />
             </Route>
           </Route>
 
