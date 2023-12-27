@@ -8,6 +8,7 @@ import UsersList from './features/users/UsersList'
 import { Routes, Route } from 'react-router-dom'
 import AddUserForm from './features/users/AddUserForm'
 import EditUser from './features/users/EditUser'
+import Prefetch from './features/auth/Prefetch'
 
 function App() {
 
@@ -17,20 +18,22 @@ function App() {
         <Route index element={<Public />} />
         <Route path='login' element={<Login />} />
 
-        <Route path='dash' element={<DashLayout />} >
-          <Route index element={<Welcome />} />
+        <Route element={<Prefetch />}>
+          <Route path='dash' element={<DashLayout />} >
+            <Route index element={<Welcome />} />
 
-          <Route path='users'>
-            <Route index element={<UsersList />} />
-            <Route path='add' element={<AddUserForm />} />
-            <Route path='edit/:id' element={<EditUser />} />
+            <Route path='users'>
+              <Route index element={<UsersList />} />
+              <Route path='add' element={<AddUserForm />} />
+              <Route path='edit/:id' element={<EditUser />} />
+            </Route>
+
+            <Route path='notes'>
+              <Route index element={<NotesList />} />
+            </Route>
           </Route>
 
-          <Route path='notes'>
-            <Route index element={<NotesList />} />
-          </Route>
         </Route>
-
       </Route>
     </Routes>
   )
