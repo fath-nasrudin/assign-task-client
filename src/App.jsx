@@ -10,6 +10,7 @@ import AddUserForm from './features/users/AddUserForm'
 import EditUser from './features/users/EditUser'
 import Prefetch from './features/auth/Prefetch'
 import AddNote from './features/notes/AddNote'
+import EditNote from './features/notes/EditNote'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path='notes'>
               <Route index element={<NotesList />} />
               <Route path='add' element={<AddNote />} />
+              <Route path='edit/:id' element={<EditNote />} />
             </Route>
           </Route>
 

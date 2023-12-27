@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { selectNoteById } from "./notesApiSlice"
 
 const NoteItem = ({ noteId }) => {
+  const navigate = useNavigate();
   const note = useSelector(state => selectNoteById(state, noteId));
 
   if (note) {
@@ -12,7 +14,7 @@ const NoteItem = ({ noteId }) => {
 
     const dateUpdated = new Date(note.updatedAt).toLocaleString('id-ID', { day: 'numeric', month: 'long' })
 
-    const handleEdit = () => { console.log('update') }
+    const handleEdit = () => { navigate(`/dash/notes/edit/${noteId}`) }
     return (
       <tr className="table__row">
         <td className="table__cell note__status">
