@@ -16,7 +16,7 @@ const UsersList = () => {
   }
 
   if (isError) {
-    content = <p>{JSON.stringify(error)}</p>
+    content = <p className='errmsg'>{error?.data?.message}</p>
   }
 
   if (isSuccess) {
