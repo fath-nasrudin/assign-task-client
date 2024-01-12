@@ -73,7 +73,7 @@ const AddNoteForm = ({ users, note }) => {
   const validTitleClass = title ? '' : 'form__input--incomplete';
   const validTextClass = text ? '' : 'form__input--incomplete';
 
-  const errContent = (isUpdateError?.data?.message || isDeleteError?.data?.message) ?? ''
+  const errContent = (updateError?.data?.message || deleteError?.data?.message) ?? ''
 
   return (
     <>
