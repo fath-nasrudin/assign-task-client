@@ -12,35 +12,45 @@ import Prefetch from './features/auth/Prefetch'
 import AddNote from './features/notes/AddNote'
 import EditNote from './features/notes/EditNote'
 import PersistLogin from './features/auth/PersistLogin'
+import RequireAuth from './features/auth/RequireAuth'
+import { ROLES } from './config/roles'
 
 function App() {
 
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
+        {/* Public Routes */}
         <Route index element={<Public />} />
         <Route path='login' element={<Login />} />
 
+        {/* Private Routes */}
         <Route element={<PersistLogin />}>
-          <Route element={<Prefetch />}>
-            <Route path='dash' element={<DashLayout />} >
-              <Route index element={<Welcome />} />
+          <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
+            <Route element={<Prefetch />}>
 
-              <Route path='users'>
-                <Route index element={<UsersList />} />
-                <Route path='add' element={<AddUserForm />} />
-                <Route path='edit/:id' element={<EditUser />} />
+              <Route path='dash' element={<DashLayout />} >
+                <Route index element={<Welcome />} />
+
+                <Route element={<RequireAuth allowedRoles={[ROLES.admin, ROLES.manager]} />}>
+                  <Route path='users'>
+                    <Route index element={<UsersList />} />
+                    <Route path='add' element={<AddUserForm />} />
+                    <Route path='edit/:id' element={<EditUser />} />
+                  </Route>
+                </Route>
+
+                <Route path='notes'>
+                  <Route index element={<NotesList />} />
+                  <Route path='add' element={<AddNote />} />
+                  <Route path='edit/:id' element={<EditNote />} />
+                </Route>
               </Route>
 
-              <Route path='notes'>
-                <Route index element={<NotesList />} />
-                <Route path='add' element={<AddNote />} />
-                <Route path='edit/:id' element={<EditNote />} />
-              </Route>
             </Route>
-
           </Route>
         </Route>
+
       </Route>
     </Routes>
   )
