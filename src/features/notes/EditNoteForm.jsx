@@ -2,10 +2,12 @@ import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import { useUpdateNoteMutation, useDeleteNoteMutation, } from './notesApiSlice'
 
 const AddNoteForm = ({ users, note }) => {
   const navigate = useNavigate();
+  const { isAdmin, isManager } = useAuth();
 
   const [updateNote, {
     isLoading: isUpdateLoading,
@@ -45,7 +47,11 @@ const AddNoteForm = ({ users, note }) => {
 
   const onDeleteNoteClicked = async (e) => {
     e.preventDefault();
-    await deleteNote({ id: note.id })
+    if (isAdmin || isManager) {
+      await deleteNote({ id: note.id })
+    } else {
+      console.log('Need admin or manager privelleged')
+    }
   }
 
   // handle when adding note success
@@ -75,6 +81,19 @@ const AddNoteForm = ({ users, note }) => {
 
   const errContent = (updateError?.data?.message || deleteError?.data?.message) ?? ''
 
+  let deleteButton = null
+  if (isAdmin || isManager) {
+    deleteButton = (
+      <button
+        className="icon-button"
+        title="Delete"
+        onClick={onDeleteNoteClicked}
+      >
+        <FontAwesomeIcon icon={faTrashCan} />
+      </button>
+    )
+  }
+
   return (
     <>
       <p className={errClass}>{errContent}</p>
@@ -97,14 +116,9 @@ const AddNoteForm = ({ users, note }) => {
           </button>
 
           {/* delete button */}
-          <button
-            className="icon-button"
-            title="Delete"
-            onClick={onDeleteNoteClicked}
-          >
-            <FontAwesomeIcon icon={faTrashCan} />
-          </button>
-        </div>
+          {deleteButton}
+        </div >
+
 
         {/* title field */}
         <label htmlFor="title" className="form__label">Title:</label>
