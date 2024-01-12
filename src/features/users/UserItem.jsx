@@ -1,12 +1,15 @@
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import { selectUserById } from './usersApiSlice'
+import { useGetUsersQuery } from './usersApiSlice'
 
 const UserItem = ({ userId }) => {
   const navigate = useNavigate();
-  const user = useSelector(state => selectUserById(state, userId));
+  const { user } = useGetUsersQuery('usersList', {
+    selectFromResult: ({ data }) => ({
+      user: data.entities[userId]
+    })
+  })
 
   if (!user) return null;
 
