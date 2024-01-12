@@ -62,7 +62,7 @@ const DashHeader = () => {
   )
 
   let userListButton = null
-  if ((isAdmin || isManager) && !USERS_REGEX.test(pathname)) {
+  if ((isAdmin || isManager) && !USERS_REGEX.test(pathname) && pathname.includes('/dash')) {
     userListButton = (
       <button
         className='icon-button'
@@ -88,7 +88,7 @@ const DashHeader = () => {
   }
 
   let noteListButton = null
-  if (!NOTES_REGEX.test(pathname)) {
+  if (!NOTES_REGEX.test(pathname) && pathname.includes('/dash')) {
     noteListButton = (
       <button
         className='icon-button'
