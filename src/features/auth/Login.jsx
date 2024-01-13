@@ -41,7 +41,9 @@ const Login = () => {
 
       navigate('/dash')
     } catch (err) {
-      if (!err.status) {
+      if (err.status === 'FETCH_ERROR') {
+        setErrMsg('No Internet Connection')
+      } else if (!err.status) {
         setErrMsg('No Server Response');
       } else if (err.status === 400) {
         setErrMsg('Missing Username or Password');
