@@ -1,7 +1,10 @@
 import useAuth from '../../hooks/useAuth';
+import useTitle from '../../hooks/useTitle';
 import { useGetNotesQuery } from '../notes/notesApiSlice'
 import NoteItem from './NoteItem';
 const NotesList = () => {
+  useTitle('Notelist')
+
   const { username, isAdmin, isManager } = useAuth();
   const {
     data: notes,

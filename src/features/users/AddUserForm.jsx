@@ -7,11 +7,14 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAddUserMutation } from "./usersApiSlice"
 import { ROLES } from "../../config/roles"
+import useTitle from "../../hooks/useTitle"
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
 const AddUserForm = () => {
+  useTitle('Add New User')
+
   const [addUser, {
     isSuccess,
     isLoading,

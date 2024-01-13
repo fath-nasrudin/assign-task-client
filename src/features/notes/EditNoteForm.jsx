@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useTitle from "../../hooks/useTitle";
 import { useUpdateNoteMutation, useDeleteNoteMutation, } from './notesApiSlice'
 
 const AddNoteForm = ({ users, note }) => {
+  useTitle('Edit Note');
+
   const navigate = useNavigate();
   const { isAdmin, isManager } = useAuth();
 

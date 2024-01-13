@@ -4,12 +4,15 @@ import { ROLES } from '../../config/roles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from "react-router-dom"
+import useTitle from "../../hooks/useTitle"
 
 // validation rules
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
 const EditUserForm = ({ user }) => {
+  useTitle('Edit User')
+
   const navigate = useNavigate()
   const [updateUser, {
     isSuccess: isUpdateSuccess,

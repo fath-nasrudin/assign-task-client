@@ -2,9 +2,11 @@ import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 import { useAddNoteMutation } from './notesApiSlice'
 
 const AddNoteForm = ({ users }) => {
+  useTitle('Add Note')
   const navigate = useNavigate();
 
   const [addNote, {
