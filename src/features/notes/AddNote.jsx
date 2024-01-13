@@ -1,9 +1,13 @@
-import { useSelector } from 'react-redux'
 import AddNoteForm from './AddNoteForm'
-import { selectAllUsers } from '../users/usersApiSlice'
+import { useGetUsersQuery } from '../users/usersApiSlice'
 
 const AddNote = () => {
-  const users = useSelector(selectAllUsers);
+  const { users } = useGetUsersQuery('usersList', {
+    selectFromResult: ({ data }) => ({
+      users: data.ids.map(id => data.entities[id])
+    })
+  })
+
   return users ? <AddNoteForm users={users} /> : <p>Loading...</p>
 }
 
